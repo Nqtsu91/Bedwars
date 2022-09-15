@@ -9,17 +9,24 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 public class Game {
 
 	public static GameState State = GameState.WAITING;
-	
+	static char bar = '\u258c';
+	public static String Prefix = "§7"+bar+" §3§lBed§b§lWars §7| ";
 	public static String MapName = "";
 	public static List<String> MapList = new ArrayList<String>();
 	public static HashMap<String, Integer> VoteMap = new HashMap<String, Integer>();
 	public static List<UUID> hasVoted = new ArrayList<UUID>();
 	public static HashMap<Team, InGameTeam> Teams = new HashMap<Team, InGameTeam>();
+	public static List<ArmorStand> DiamondGen = new ArrayList<ArmorStand>();
+	public static List<ArmorStand> EmeraldGen = new ArrayList<ArmorStand>();
+	public static HashMap<UUID, UUID> HotBarIsShowingPlayer = new HashMap<UUID, UUID>();
+	public static int DiamondLevel = 1;
+	public static int EmeraldLevel = 1;
 	public static String[] MapNames = {"Bonsai",
 			"Candy",
 			"Castle",
@@ -61,9 +68,24 @@ public class Game {
 		}
 	}
 
-
-
-
+	public static void addPlayerToTeam(Player player, Team t) {
+		removeFromTeam(player);
+		Game.Teams.get(t).members.add(new InGamePlayers(player.getUniqueId(), t));
+		player.sendMessage(Game.Prefix+"§aVous avez rejoins une equipe.");
+	}
+	
+	public static void removeFromTeam(Player player) {
+		for (InGameTeam t : Game.Teams.values()) {
+			InGamePlayers ToRemove = null;
+			for (InGamePlayers pl : t.members) {
+				if (pl.player == player.getUniqueId()) {
+					ToRemove = pl;
+					player.sendMessage(Game.Prefix+"§cVous avez quitté votre equipe.");
+				}
+			}
+			t.members.remove(ToRemove);
+		}
+	}
 
 	public static String getPlayerPrefix(Player player) {
 		String Prefix = "";

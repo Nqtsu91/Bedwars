@@ -7,6 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import fr.natsu.bedwars.game.GameState;
 import fr.natsu.bedwars.utils.HotbarMessage;
 import fr.natsu.bedwars.utils.scutils;
+import fr.natsu.bedwars.utils.utils;
 import fr.natsu.bedwars.game.Game;
 
 public class LobbyRunnable extends BukkitRunnable {
@@ -19,7 +20,7 @@ public class LobbyRunnable extends BukkitRunnable {
 	@Override
 	public void run() {
 		/*Display scordboards*/
-		if (Game.State == GameState.WAITING || Game.State == GameState.WAITING) {
+		if (Game.State == GameState.WAITING || Game.State == GameState.READY) {
 			scutils.showWaitingSC();
 			
 			if (Bukkit.getOnlinePlayers().size() >= MinPlayersToStart) {
@@ -27,7 +28,8 @@ public class LobbyRunnable extends BukkitRunnable {
 					if (TimeToStart == 0) {
 						Game.State = GameState.PLAYING;
 						/*Démarrage de la partie*/
-						
+						utils.loadGenerators("world");
+						utils.loadDiamondGenerators("world");
 						
 					} else if (TimeToStart <= 15) {
 						HotbarMessage.send(player, "§a§lStarting in "+TimeToStart+" seconds.");

@@ -26,6 +26,7 @@ import fr.natsu.bedwars.game.Game;
 import fr.natsu.bedwars.game.GameState;
 import fr.natsu.bedwars.listeners.InGameListener;
 import fr.natsu.bedwars.listeners.LobbyListener;
+import fr.natsu.bedwars.listeners.LobbyListenerMenu;
 import fr.natsu.bedwars.runnable.InGameRunnable;
 import fr.natsu.bedwars.runnable.LobbyRunnable;
 import fr.natsu.bedwars.utils.FastBoard;
@@ -41,8 +42,15 @@ public class main extends JavaPlugin implements PluginMessageListener {
 	public void onEnable() {
 		System.out.println("[BEDWARS] Enabled !");
 
+		if (!(new File("plugins/BedWars/config.yml").exists())) {
+		    saveDefaultConfig();
+		    System.out.println("========================================================== Plugin created config");
+		}
+		reloadConfig();
+		
 		//getCommand("h").setExecutor(new CommandHost(this));
 		PluginManager Pm = getServer().getPluginManager();
+		Pm.registerEvents(new LobbyListenerMenu(), this);
 		Pm.registerEvents(new LobbyListener(), this);
 		Pm.registerEvents(new InGameListener(), this);
 		new LobbyRunnable().runTaskTimer(this, 0L, 20L);

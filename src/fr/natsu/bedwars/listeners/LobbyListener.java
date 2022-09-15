@@ -1,11 +1,14 @@
 package fr.natsu.bedwars.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import fr.natsu.bedwars.game.Game;
 import fr.natsu.bedwars.game.GameState;
@@ -75,6 +78,9 @@ public class LobbyListener implements Listener {
 		event.getPlayer().setPlayerListName("§9"+event.getPlayer().getName());
 		scutils.checkForScoreBoardAdd(event.getPlayer());
 		utils.showMapSelection(event.getPlayer());
+		event.getPlayer().getInventory().clear();
+		event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 1000000, 10, false, false), true);
+		event.getPlayer().getInventory().addItem(utils.getItem(Material.BANNER, 1, "§3§lChoix d'equipe", null, 0));
 	}
 	
 	

@@ -1,0 +1,20 @@
+#
+#
+#
+#-------------------------
+#         HiveMC
+# Based BedWars for Chads 
+#	By Natsu91
+#-------------------------
+#
+# Data Store Type:
+#
+#(map name)_(team)_(value): int
+#
+# For every team:
+# Values: genX/genY/genZ/spawnX/spawnY/spawnZ/NPCX/NPCY/NPCZ/NPC_2X/NPC_2Y/NPC_2Z
+#
+# Teams:
+# Red, Green, Blue, Yellow, Pink, Orange, Aqua, DarkRed
+#
+#
