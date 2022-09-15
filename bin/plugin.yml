@@ -1,0 +1,9 @@
+name: BedWars
+version: 0.0.1
+author: Natsu91
+main: fr.natsu.bedwars.main.main
+commands:
+  h:
+    description: Commande pour les hosts
+    permission: demonslayer.host
+    default: false
