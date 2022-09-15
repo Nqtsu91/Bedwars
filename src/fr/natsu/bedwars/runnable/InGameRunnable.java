@@ -68,7 +68,7 @@ public class InGameRunnable extends BukkitRunnable {
 					Player player = Bukkit.getPlayer(IG.player);
 					for (InGamePlayers IG_2 : T.members) {
 						if (Bukkit.getPlayer(IG_2.player) != null && player != Bukkit.getPlayer(IG_2.player)) {			//showing every team mate
-							HotbarMessage.send(player, Bukkit.getPlayer(IG.player).getName()+"§7 | §b"+IG_2.kills+" §fKills");
+							HotbarMessage.send(player, Bukkit.getPlayer(IG.player).getName()+"ï¿½7 | ï¿½b"+IG_2.kills+" ï¿½fKills");
 							
 						}
 					}
@@ -81,19 +81,19 @@ public class InGameRunnable extends BukkitRunnable {
 
 	private void HandleTimers() {
 		if (InGameTimer == 10*60) {
-			Bukkit.broadcastMessage(Game.Prefix+"§bDiamond Summoners §fupgraded to Tier 2 !");
+			Bukkit.broadcastMessage(Game.Prefix+"ï¿½bDiamond Summoners ï¿½fupgraded to Tier 2 !");
 			Game.DiamondLevel = 2;
 		}
 		else if (InGameTimer == 15*60) {
-			Bukkit.broadcastMessage(Game.Prefix+"§aEmerald Summoners §fupgraded to Tier 2 !");
+			Bukkit.broadcastMessage(Game.Prefix+"ï¿½aEmerald Summoners ï¿½fupgraded to Tier 2 !");
 			Game.EmeraldLevel = 2;
 		}
 		else if (InGameTimer == 20*60) {
-			Bukkit.broadcastMessage(Game.Prefix+"§bDiamond Summoners §fupgraded to Tier 3 !");
+			Bukkit.broadcastMessage(Game.Prefix+"ï¿½bDiamond Summoners ï¿½fupgraded to Tier 3 !");
 			Game.DiamondLevel = 3;
 		}
 		else if (InGameTimer == 20*60) {
-			Bukkit.broadcastMessage(Game.Prefix+"§aEmerald Summoners §fupgraded to Tier 3 !");
+			Bukkit.broadcastMessage(Game.Prefix+"ï¿½aEmerald Summoners ï¿½fupgraded to Tier 3 !");
 			Game.EmeraldLevel = 3;
 		}
 	}
