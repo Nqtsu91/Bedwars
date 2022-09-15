@@ -38,9 +38,9 @@ public class InGameRunnable extends BukkitRunnable {
 				HandleBaseGoldDrop(IG, Loc);
 				HandleBaseDiamondDrop(IG, Loc);
 				HandleBaseEmeraldDrop(IG, Loc);
-				
-				
 			}
+
+			//Teamp HP, ARMOR, KILLS
 			
 			
 			
