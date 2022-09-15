@@ -34,6 +34,10 @@ public class InGameRunnable extends BukkitRunnable {
 			for (Team T : Game.Teams.keySet()) {
 				Location Loc = Game.Teams.get(T).state.getLocation();
 				InGameTeam IG = Game.Teams.get(T);
+				HandleBaseIronDrop(IG, Loc);
+				HandleBaseGoldDrop(IG, Loc);
+				HandleBaseDiamondDrop(IG, Loc);
+				HandleBaseEmeraldDrop(IG, Loc);
 				
 				
 			}
