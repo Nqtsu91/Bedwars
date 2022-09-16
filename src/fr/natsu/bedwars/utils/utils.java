@@ -227,6 +227,30 @@ public class utils {
 		}
 	}
 	
+	public static void loadSpawns(String WorldName) {
+		String[] teams = {"red", "darkred", "blue", "aqua", "green", "orange", "pink", "yellow"};	
+		Team[] coresp = {Team.RED, Team.DARK_RED, Team.BLUE, Team.AQUA, Team.GREEN, Team.ORANGE, Team.PINK, Team.YELLOW};
+		int tick = 0;
+		for (String team : teams) {
+			Location Loc = new Location(Bukkit.getWorld(WorldName), main.INSTANCE.getConfig().getInt(WorldName+"_"+team+"_spawnX"), main.INSTANCE.getConfig().getInt(WorldName+"_"+team+"_spawnY"), main.INSTANCE.getConfig().getInt(WorldName+"_"+team+"_spawnZ"));
+			setSpawn(Loc, coresp[tick]);
+			tick++;
+		}
+	}
+	
+	public static void setSpawn(Location loc, Team team) {
+		Game.Teams.get(team).spawn = loc;
+	}
+
+	public static void tpToSpawn(Player player) {
+		if (Game.getTeam(player) != null) {
+			if (Game.Teams.get(Game.getTeam(player)).spawn != null) {
+				player.teleport(Game.Teams.get(Game.getTeam(player)).spawn);
+			}
+		}
+	}
+	
+
 	static public ItemStack getItem(Material item, int count, String Name, List<String> lore, int dmg) {
 		ItemStack ItemReturn = new ItemStack(item);
 		ItemMeta itemmeta = ItemReturn.getItemMeta();
@@ -330,7 +354,89 @@ public class utils {
 		player.openInventory(ConfigFirstInv);
 	}
 	
+	public static void openMainShopMenu(Player player) {
+		Inventory ConfigFirstInv = Bukkit.createInventory(null, 27, "§3Bed§bWars§f - ShopMain");
+
+		List<String> Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7Buy blocks to bridge, build and");
+		Lore.add("§7protect your bed !");
+		Lore.add("");
+		Lore.add("§bClick to view §a§lBlocks");
+		ItemStack Slots = getItem(Material.WOOL, 1, "§a§lBlocks", Lore, 0);
+		ConfigFirstInv.setItem(10, Slots);
+		
+		Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7Be prepared when you encounter");
+		Lore.add("§7your evil enemies");
+		Lore.add("");
+		Lore.add("§bClick to view §c§lArmor");
+		Slots = getItem(Material.IRON_CHESTPLATE, 1, "§c§lArmor", Lore, 0);
+		ConfigFirstInv.setItem(12, Slots);
+		
+		Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7A choice of  weapons and tools");
+		Lore.add("§7to use in your fights");
+		Lore.add("");
+		Lore.add("§bClick to view §b§lWeapons and Tools");
+		Slots = getItem(Material.IRON_SWORD, 1, "§b§lWeapons and Tools", Lore, 0);
+		ConfigFirstInv.setItem(14, Slots);
+
+		
+		player.openInventory(ConfigFirstInv);
+	}
 	
+	
+	public static void openToolMenuShop(Player player) {
+		Inventory ConfigFirstInv = Bukkit.createInventory(null, 27, "§3Bed§bWars§f - ShopTool");
+		ItemStack border = new ItemStack(Material.STAINED_GLASS_PANE, 1);
+		border.setDurability((short) 11);
+		ConfigFirstInv.setItem(0, border);
+		ConfigFirstInv.setItem(1, border);
+		ConfigFirstInv.setItem(9, border);
+		ConfigFirstInv.setItem(8, border);
+		ConfigFirstInv.setItem(7, border);
+		ConfigFirstInv.setItem(17, border);
+		ConfigFirstInv.setItem(36, border);
+		ConfigFirstInv.setItem(44, border);
+		ConfigFirstInv.setItem(45, border);
+		ConfigFirstInv.setItem(46, border);
+		ConfigFirstInv.setItem(53, border);
+		ConfigFirstInv.setItem(52, border);
+
+		int BaseStoneId = 10;
+		List<String> Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7Buy blocks to bridge, build and");
+		Lore.add("§7protect your bed !");
+		Lore.add("");
+		Lore.add("§bClick to view §a§lBlocks");
+		ItemStack Slots = getItem(Material.WOOL, 1, "§a§lBlocks", Lore, 14);
+		ConfigFirstInv.setItem(10, Slots);
+		
+		Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7Be prepared when you encounter");
+		Lore.add("§7your evil enemies");
+		Lore.add("");
+		Lore.add("§bClick to view §c§lArmor");
+		Slots = getItem(Material.IRON_CHESTPLATE, 1, "§c§lArmor", Lore, 11);
+		ConfigFirstInv.setItem(12, Slots);
+		
+		Lore = new ArrayList<String>();
+		Lore.add("");
+		Lore.add("§7A choice of  weapons and tools");
+		Lore.add("§7to use in your fights");
+		Lore.add("");
+		Lore.add("§bClick to view §b§lWeapons and Tools");
+		Slots = getItem(Material.IRON_SWORD, 1, "§b§lWeapons and Tools", Lore, 5);
+		ConfigFirstInv.setItem(14, Slots);
+
+		
+		player.openInventory(ConfigFirstInv);
+	}
 	
 
 }

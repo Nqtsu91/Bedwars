@@ -26,10 +26,19 @@ public class LobbyRunnable extends BukkitRunnable {
 			if (Bukkit.getOnlinePlayers().size() >= MinPlayersToStart) {
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (TimeToStart == 0) {
-						Game.State = GameState.PLAYING;
-						/*Démarrage de la partie*/
-						utils.loadGenerators("world");
-						utils.loadDiamondGenerators("world");
+						if (Game.canStart()) {
+							Game.State = GameState.PLAYING;
+							/*Démarrage de la partie*/
+							utils.loadGenerators("world");
+							utils.loadDiamondGenerators("world");
+							utils.loadSpawns("world");
+							for (Player pl : Bukkit.getOnlinePlayers()) {
+								utils.tpToSpawn(pl);
+							}
+						} else {
+							Bukkit.broadcastMessage(Game.Prefix+"§6Players didnt join their team in time.");
+							TimeToStart += 30;
+						}
 						
 					} else if (TimeToStart <= 15) {
 						HotbarMessage.send(player, "§a§lStarting in "+TimeToStart+" seconds.");
