@@ -1,5 +1,7 @@
 package fr.natsu.bedwars.game;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class InGamePlayers {
@@ -12,10 +14,12 @@ public class InGamePlayers {
 	public int LegsLevel = 0;
 	public int BootsLevel = 0;
 	public Team t = null;
+	public static List<InGamePlayers> ListOfPl = new ArrayList<InGamePlayers>();
 	
 	public InGamePlayers(UUID id, Team t) {
 		this.player = id;
 		this.t = t;
+		ListOfPl.add(this);
 	}
 	
 	public void addKills() {

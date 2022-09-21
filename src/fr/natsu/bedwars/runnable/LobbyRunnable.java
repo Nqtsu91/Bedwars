@@ -32,6 +32,7 @@ public class LobbyRunnable extends BukkitRunnable {
 							utils.loadGenerators("world");
 							utils.loadDiamondGenerators("world");
 							utils.loadSpawns("world");
+							utils.loadShopNPC("world");
 							for (Player pl : Bukkit.getOnlinePlayers()) {
 								utils.tpToSpawn(pl);
 							}

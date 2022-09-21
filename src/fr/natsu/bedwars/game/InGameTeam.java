@@ -20,6 +20,7 @@ public class InGameTeam {
 	public boolean hasBed = true;
 	public Location spawn = null;
 	public ArmorStand title = null;
+	public Location BedLoc = null;
 	public ArmorStand state = null;
 	
 	public InGameTeam(String Name, Location spawn) {

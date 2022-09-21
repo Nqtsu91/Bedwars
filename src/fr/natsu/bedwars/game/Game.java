@@ -30,10 +30,13 @@ public class Game {
 	public static List<ArmorStand> EmeraldGen = new ArrayList<ArmorStand>();
 	public static HashMap<UUID, UUID> HotBarIsShowingPlayer = new HashMap<UUID, UUID>();
 	/*Shop data*/
-	public static HashMap<ItemStack, PriceItem> ToolPrices = new HashMap<ItemStack, PriceItem>();
-	public static HashMap<ItemStack, PriceItem> BlockPrices = new HashMap<ItemStack, PriceItem>();
-	public static HashMap<ItemStack, PriceItem> ArmorPrices = new HashMap<ItemStack, PriceItem>();
+	public static HashMap<Material, PriceItem> ToolPrices = new HashMap<Material, PriceItem>();
+	public static HashMap<Material, PriceItem> BlockPrices = new HashMap<Material, PriceItem>();
+	public static HashMap<Material, PriceItem> ArmorPrices = new HashMap<Material, PriceItem>();
 	public static HashMap<ItemStack, PriceItem> TrapPrices = new HashMap<ItemStack, PriceItem>();
+	public static HashMap<Integer, PriceItem> IronPrices = new HashMap<Integer, PriceItem>();
+	public static HashMap<Integer, PriceItem> GoldPrices = new HashMap<Integer, PriceItem>();
+	public static HashMap<Integer, PriceItem> DiamondPrices = new HashMap<Integer, PriceItem>();
 	
 	public static ItemStack[] Tools = new ItemStack[16];
 	public static ItemStack[] Armors = new ItemStack[12];
@@ -68,96 +71,152 @@ public class Game {
 	private void initPrices() {
 		/*Tools*/
 		int i = 0;
-		ToolPrices.put(utils.getItem(Material.STONE_SWORD, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 5));
-		Tools[i] = utils.getItem(Material.STONE_SWORD, 1, null, null, 0);
+		ToolPrices.put(Material.STONE_SWORD, new PriceItem(Material.IRON_INGOT, 5));
+		Tools[i] = utils.getItem(Material.STONE_SWORD, 1, "Stone Sword", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.STONE_PICKAXE, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 10));
-		Tools[i] = utils.getItem(Material.STONE_PICKAXE, 1, null, null, 0);
+		ToolPrices.put(Material.STONE_PICKAXE, new PriceItem(Material.IRON_INGOT, 10));
+		Tools[i] = utils.getItem(Material.STONE_PICKAXE, 1, "Stone Pick", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.STONE_AXE, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 15));
-		Tools[i] = utils.getItem(Material.STONE_AXE, 1, null, null, 0);
+		ToolPrices.put(Material.STONE_AXE, new PriceItem(Material.IRON_INGOT, 15));
+		Tools[i] = utils.getItem(Material.STONE_AXE, 1, "Stone Axe", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.STONE_SPADE, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 5));
-		Tools[i] = utils.getItem(Material.STONE_SPADE, 1, null, null, 0);
-		i++;
-		
-		ToolPrices.put(utils.getItem(Material.IRON_SWORD, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		Tools[i] = utils.getItem(Material.IRON_SWORD, 1, null, null, 0);
-		i++;
-		ToolPrices.put(utils.getItem(Material.IRON_PICKAXE, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		Tools[i] = utils.getItem(Material.IRON_PICKAXE, 1, null, null, 0);
-		i++;
-		ToolPrices.put(utils.getItem(Material.IRON_AXE, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 5));
-		Tools[i] = utils.getItem(Material.IRON_AXE, 1, null, null, 0);
-		i++;
-		ToolPrices.put(utils.getItem(Material.IRON_SPADE, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 5));
-		Tools[i] = utils.getItem(Material.IRON_SPADE, 1, null, null, 0);
+		ToolPrices.put(Material.STONE_SPADE, new PriceItem(Material.IRON_INGOT, 5));
+		Tools[i] = utils.getItem(Material.STONE_SPADE, 1, "Stone Spade", null, 0);
 		i++;
 		
+		ToolPrices.put(Material.IRON_SWORD, new PriceItem(Material.GOLD_INGOT, 10));
+		Tools[i] = utils.getItem(Material.IRON_SWORD, 1, "Iron Sword", null, 0);
+		i++;
+		ToolPrices.put(Material.IRON_PICKAXE, new PriceItem(Material.GOLD_INGOT, 10));
+		Tools[i] = utils.getItem(Material.IRON_PICKAXE, 1, "Iron Pick", null, 0);
+		i++;
+		ToolPrices.put(Material.IRON_AXE, new PriceItem(Material.GOLD_INGOT, 5));
+		Tools[i] = utils.getItem(Material.IRON_AXE, 1, "Iron Axe", null, 0);
+		i++;
+		ToolPrices.put(Material.IRON_SPADE, new PriceItem(Material.GOLD_INGOT, 5));
+		Tools[i] = utils.getItem(Material.IRON_SPADE, 1, "Iron Spade", null, 0);
+		i++;
 		
-		ToolPrices.put(utils.getItem(Material.DIAMOND_SWORD, 1, null, null, 0), new PriceItem(Material.EMERALD, 5));
-		Tools[i] = utils.getItem(Material.DIAMOND_SWORD, 1, null, null, 0);
+		
+		ToolPrices.put(Material.DIAMOND_SWORD, new PriceItem(Material.EMERALD, 5));
+		Tools[i] = utils.getItem(Material.DIAMOND_SWORD, 1, "Diamond Sword", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.DIAMOND_PICKAXE, 1, null, null, 0), new PriceItem(Material.EMERALD, 2));
-		Tools[i] = utils.getItem(Material.DIAMOND_PICKAXE, 1, null, null, 0);
+		ToolPrices.put(Material.DIAMOND_PICKAXE, new PriceItem(Material.EMERALD, 2));
+		Tools[i] = utils.getItem(Material.DIAMOND_PICKAXE, 1, "Diamond Pick", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.IRON_AXE, 1, null, null, 0), new PriceItem(Material.DIAMOND, 30));
-		Tools[i] = utils.getItem(Material.IRON_AXE, 1, null, null, 0);
+		ToolPrices.put(Material.IRON_AXE, new PriceItem(Material.DIAMOND, 30));
+		Tools[i] = utils.getItem(Material.IRON_AXE, 1, "Diamond Axe", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.DIAMOND_SPADE, 1, null, null, 0), new PriceItem(Material.DIAMOND, 5));
-		Tools[i] = utils.getItem(Material.DIAMOND_SPADE, 1, null, null, 0);
+		ToolPrices.put(Material.DIAMOND_SPADE, new PriceItem(Material.DIAMOND, 5));
+		Tools[i] = utils.getItem(Material.DIAMOND_SPADE, 1, "Diamond Spade", null, 0);
 		i++;
 		
-		ToolPrices.put(utils.getItem(Material.FIREBALL, 1, null, null, 0), new PriceItem(Material.EMERALD, 1));
-		Tools[i] = utils.getItem(Material.FIREBALL, 1, null, null, 0);
+		ToolPrices.put(Material.FIREBALL, new PriceItem(Material.EMERALD, 1));
+		Tools[i] = utils.getItem(Material.FIREBALL, 1, "Fire Ball", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.BOW, 1, null, null, 0), new PriceItem(Material.DIAMOND, 2));
-		Tools[i] = utils.getItem(Material.BOW, 1, null, null, 0);
+		ToolPrices.put(Material.BOW, new PriceItem(Material.DIAMOND, 2));
+		Tools[i] = utils.getItem(Material.BOW, 1, "Bow", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.ARROW, 10, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		Tools[i] = utils.getItem(Material.ARROW, 1, null, null, 0);
+		ToolPrices.put(Material.ARROW, new PriceItem(Material.GOLD_INGOT, 10));
+		Tools[i] = utils.getItem(Material.ARROW, 10, "Arrows", null, 0);
 		i++;
-		ToolPrices.put(utils.getItem(Material.WATER_BUCKET, 1, null, null, 0), new PriceItem(Material.EMERALD, 2));
-		Tools[i] = utils.getItem(Material.WATER_BUCKET, 1, null, null, 0);
+		ToolPrices.put(Material.WATER_BUCKET, new PriceItem(Material.EMERALD, 2));
+		Tools[i] = utils.getItem(Material.WATER_BUCKET, 1, "MLG", null, 0);
 		i++;
 		
 		/*Armors*/
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_LEGGINGS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_BOOTS, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 10));
+		i = 0;
+		ArmorPrices.put(Material.CHAINMAIL_HELMET, new PriceItem(Material.IRON_INGOT, 10));
+		Armors[i] = utils.getItem(Material.CHAINMAIL_HELMET, 1, "Chain Helmet", null, 0);
+		i++;
+		ArmorPrices.put(Material.CHAINMAIL_CHESTPLATE, new PriceItem(Material.GOLD_INGOT, 10));
+		Armors[i] = utils.getItem(Material.CHAINMAIL_CHESTPLATE, 1, "Chain Chestplate", null, 0);
+		i++;
+		ArmorPrices.put(Material.CHAINMAIL_LEGGINGS, new PriceItem(Material.GOLD_INGOT, 10));
+		Armors[i] = utils.getItem(Material.CHAINMAIL_LEGGINGS, 1, "Chain Leggings", null, 0);
+		i++;
+		ArmorPrices.put(Material.CHAINMAIL_BOOTS, new PriceItem(Material.IRON_INGOT, 10));
+		Armors[i] = utils.getItem(Material.CHAINMAIL_BOOTS, 1, "Chain Boots", null, 0);
+		i++;
+		ArmorPrices.put(Material.IRON_HELMET, new PriceItem(Material.IRON_INGOT, 50));
+		Armors[i] = utils.getItem(Material.IRON_HELMET, 1, "Iron Helmet", null, 0);
+		i++;
+		ArmorPrices.put(Material.IRON_CHESTPLATE, new PriceItem(Material.EMERALD, 2));
+		Armors[i] = utils.getItem(Material.IRON_CHESTPLATE, 1, "Iron Chestplate", null, 0);
+		i++;
+		ArmorPrices.put(Material.IRON_LEGGINGS, new PriceItem(Material.DIAMOND, 20));
+		Armors[i] = utils.getItem(Material.IRON_LEGGINGS, 1, "Iron Leggings", null, 0);
+		i++;
+		ArmorPrices.put(Material.IRON_BOOTS, new PriceItem(Material.GOLD_INGOT, 50));
+		Armors[i] = utils.getItem(Material.IRON_BOOTS, 1, "Iron Boots", null, 0);
+		i++;
 		
-		ToolPrices.put(utils.getItem(Material.IRON_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 50));
-		ToolPrices.put(utils.getItem(Material.IRON_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.EMERALD, 2));
-		ToolPrices.put(utils.getItem(Material.IRON_LEGGINGS, 1, null, null, 0), new PriceItem(Material.DIAMOND, 20));
-		ToolPrices.put(utils.getItem(Material.IRON_BOOTS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 50));
-		
-		ToolPrices.put(utils.getItem(Material.DIAMOND_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 200));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.EMERALD, 5));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_LEGGINGS, 1, null, null, 0), new PriceItem(Material.DIAMOND, 50));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_BOOTS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 200));
-		
+		ArmorPrices.put(Material.DIAMOND_HELMET, new PriceItem(Material.IRON_INGOT, 200));
+		Armors[i] = utils.getItem(Material.DIAMOND_HELMET, 1, "Diamond Hemlet", null, 0);
+		i++;
+		ArmorPrices.put(Material.DIAMOND_CHESTPLATE, new PriceItem(Material.EMERALD, 5));
+		Armors[i] = utils.getItem(Material.DIAMOND_CHESTPLATE, 1, "Diamond Chestplate", null, 0);
+		i++;
+		ArmorPrices.put(Material.DIAMOND_LEGGINGS, new PriceItem(Material.DIAMOND, 50));
+		Armors[i] = utils.getItem(Material.DIAMOND_LEGGINGS, 1, "Diamond Leggings", null, 0);
+		i++;
+		ArmorPrices.put(Material.DIAMOND_BOOTS, new PriceItem(Material.GOLD_INGOT, 200));
+		Armors[i] = utils.getItem(Material.DIAMOND_BOOTS, 1, "Diamond Boots", null, 0);
+		i++;
 		
 		/*Blocks*/
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_LEGGINGS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 10));
-		ToolPrices.put(utils.getItem(Material.CHAINMAIL_BOOTS, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 10));
+		i = 0;
+		BlockPrices.put(Material.STAINED_GLASS, new PriceItem(Material.IRON_INGOT, 5));
+		System.out.println("Added STAINEDGLASS");
+		Blocks[i] = utils.getItem(Material.STAINED_GLASS, 32, "Stained Glass", null, 0);
+		i++;
+		BlockPrices.put(Material.WOOL, new PriceItem(Material.IRON_INGOT, 5));
+		Blocks[i] = utils.getItem(Material.WOOL, 32, "Wool", null, 0);
+		i++;
+		BlockPrices.put(Material.WOOD, new PriceItem(Material.IRON_INGOT, 6));
+		Blocks[i] = utils.getItem(Material.WOOD, 32, "Wooden Planks", null, 0);
+		i++;
+		BlockPrices.put(Material.STONE, new PriceItem(Material.GOLD_INGOT, 10));
+		Blocks[i] = utils.getItem(Material.STONE, 32, "Polished Andesite", null, 6);
+		i++;
+		BlockPrices.put(Material.ENDER_STONE, new PriceItem(Material.GOLD_INGOT, 8));
+		Blocks[i] = utils.getItem(Material.ENDER_STONE, 32, "Ender Stone", null, 0);
+		i++;
+		BlockPrices.put(Material.STAINED_CLAY, new PriceItem(Material.DIAMOND, 10));
+		Blocks[i] = utils.getItem(Material.STAINED_CLAY, 32, "Stained Clay", null, 0);
+		i++;
+		BlockPrices.put(Material.OBSIDIAN, new PriceItem(Material.EMERALD, 1));
+		Blocks[i] = utils.getItem(Material.OBSIDIAN, 1, "Obsidian", null, 0);
+		i++;
 		
-		ToolPrices.put(utils.getItem(Material.IRON_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 50));
-		ToolPrices.put(utils.getItem(Material.IRON_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.EMERALD, 2));
-		ToolPrices.put(utils.getItem(Material.IRON_LEGGINGS, 1, null, null, 0), new PriceItem(Material.DIAMOND, 20));
-		ToolPrices.put(utils.getItem(Material.IRON_BOOTS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 50));
 		
-		ToolPrices.put(utils.getItem(Material.DIAMOND_HELMET, 1, null, null, 0), new PriceItem(Material.IRON_INGOT, 200));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_CHESTPLATE, 1, null, null, 0), new PriceItem(Material.EMERALD, 5));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_LEGGINGS, 1, null, null, 0), new PriceItem(Material.DIAMOND, 50));
-		ToolPrices.put(utils.getItem(Material.DIAMOND_BOOTS, 1, null, null, 0), new PriceItem(Material.GOLD_INGOT, 200));
+		IronPrices.put(1, new PriceItem(Material.IRON_INGOT, 5));
+		IronPrices.put(2, new PriceItem(Material.IRON_INGOT, 10));
+		IronPrices.put(3, new PriceItem(Material.GOLD_INGOT, 32));
+		IronPrices.put(4, new PriceItem(Material.DIAMOND, 10));
+		
+		GoldPrices.put(1, new PriceItem(Material.DIAMOND, 1));
+		GoldPrices.put(2, new PriceItem(Material.GOLD_INGOT, 10));
+		GoldPrices.put(3, new PriceItem(Material.GOLD_INGOT, 32));
+		GoldPrices.put(4, new PriceItem(Material.EMERALD, 2));
+		
+		DiamondPrices.put(1, new PriceItem(Material.EMERALD, 5));
+		DiamondPrices.put(2, new PriceItem(Material.DIAMOND, 10));
+		DiamondPrices.put(3, new PriceItem(Material.DIAMOND, 32));
+		DiamondPrices.put(4, new PriceItem(Material.DIAMOND, 64));
 		
 	}
 
 
-
+	static public InGamePlayers getInGame(Player player) {
+		for (InGamePlayers Pl: InGamePlayers.ListOfPl) {
+			if (Pl.player == player.getUniqueId()) {
+				return(Pl);
+			}
+		}
+		return(null);
+	}
+	
 	public static void createTeam() {
 		for (Team t : Team.values()) {
 			Teams.put(t, new InGameTeam("Unamed", new Location(Bukkit.getWorld("world"), 0, 0, 0)));

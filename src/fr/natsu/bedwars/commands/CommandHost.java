@@ -27,7 +27,7 @@ public class CommandHost implements CommandExecutor{
 			
 			if (command.getName().equalsIgnoreCase("h")) {
 				if (args[0].equalsIgnoreCase("test")) {
-					utils.spawnBaseGenerator(player.getLocation(), Team.DARK_RED);
+					utils.openMainUpgrade(player);
 				}
 				if (args[0].equalsIgnoreCase("up")) {
 					Game.Teams.get(Team.DARK_RED).upgradeDiamond();
